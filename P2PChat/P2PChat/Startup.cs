@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using P2PChat.Data;
+using P2PChat.Services;
 
 namespace P2PChat
 {
@@ -26,6 +27,7 @@ namespace P2PChat
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<UserService>();
             services.AddDbContext<ApplicationContext>(builder =>
                 builder.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         }

@@ -1,0 +1,35 @@
+﻿
+@using P2PChat.Models
+
+@model User
+
+<h2>Welcome to P2P Chat</h2>
+
+Current User: @Model.Name
+
+<div>
+    @if (Model.Messages.Count == 0)
+    {
+        <p>There are no messages</p>
+    }
+    else
+    {
+
+        foreach (var message in Model.Messages)
+        {
+            <div>
+                <strong>@Model.Name</strong> <p>@message.DateCreated</p>
+            </div>
+            <div>
+                <p>@message.Text</p>
+            </div>
+        }
+    }
+</div>
+<div>
+    <form action="SendMessage" method="post">
+        <label for="message">Message</label>
+        <input type="text" id="message" name="Text" />
+        <button type="submit">Submit</button>
+    </form>
+</div>
