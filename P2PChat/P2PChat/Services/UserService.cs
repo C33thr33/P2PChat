@@ -1,4 +1,5 @@
-﻿using P2PChat.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using P2PChat.Data;
 using P2PChat.Models;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,12 @@ namespace P2PChat.Services
         {
             using (var database = applicationContext)
             {
-                currentUser = database.Users.FirstOrDefault(u => u.Name == username);
+                currentUser = database.Users.Include(u => u.Messages).FirstOrDefault(u => u.Name == username);
                 if (currentUser == null)
                 {
                     database.Users.Add(new User(username));
                     database.SaveChanges();
-                    currentUser = database.Users.FirstOrDefault(u => u.Name == username);
+                    currentUser = database.Users.Include(u => u.Messages).FirstOrDefault(u => u.Name == username);
                 }
             }
         }
@@ -34,11 +35,13 @@ namespace P2PChat.Services
         {
             return currentUser;
         }
-        public void SendMessage(string message)
+        public void SendMessage(string text)
         {
             using (var database = applicationContext)
             {
-                database.Messages.Add(new Message(message));
+                var message = new Message(text);
+                message.User = database.Users.First(u=>u.Id == currentUser.Id);
+                database.Messages.Add(message);
                 database.SaveChanges();
             }
         }

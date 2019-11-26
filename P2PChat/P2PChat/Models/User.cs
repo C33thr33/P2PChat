@@ -20,5 +20,9 @@ namespace P2PChat.Models
             Name = name;
             Messages = new List<Message>();
         }
+        public User()
+        {
+            Messages = new List<Message>();
+        }
     }
 }

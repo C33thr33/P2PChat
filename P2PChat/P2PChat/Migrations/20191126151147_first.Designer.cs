@@ -10,7 +10,7 @@ using P2PChat.Data;
 namespace P2PChat.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191126094106_first")]
+    [Migration("20191126151147_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace P2PChat.Migrations
 
             modelBuilder.Entity("P2PChat.Models.Message", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

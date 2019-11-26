@@ -20,6 +20,7 @@ namespace P2PChat.Data
         {
             modelBuilder.Entity<User>().HasMany(m => m.Messages);
             modelBuilder.Entity<Message>().HasOne(u => u.User);
+            modelBuilder.Entity<Message>().HasKey(m => m.Id);
         }
     }
 }

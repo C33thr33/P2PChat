@@ -25,7 +25,7 @@ namespace P2PChat.Migrations
                 name: "Messages",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: false),
                     UserId = table.Column<int>(nullable: true),
